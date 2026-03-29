@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모그링 럭키 세븐 - 5개입</title>
+    <style>
+        :root { --mg-green: #4a6741; --mg-bg: #fdfdfb; }
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--mg-bg);
+            display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
+            margin: 0; color: #333;
+        }
+        .header { text-align: center; margin-bottom: 30px; }
+        h1 { font-size: 1.8rem; color: var(--mg-green); margin: 0; }
+        .game-container {
+            width: 100%; max-width: 400px; background: white;
+            padding: 20px; border-radius: 15px; border: 1px solid #eee;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .game-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 0; border-bottom: 1px dashed #eee;
+        }
+        .game-row:last-child { border-bottom: none; }
+        .game-label { font-weight: bold; color: #aaa; font-size: 0.8rem; width: 25px; }
+        .ball-group { display: flex; gap: 6px; }
+        .ball {
+            width: 34px; height: 34px; line-height: 34px; text-align: center;
+            border-radius: 50%; background: #f0f0f0; font-size: 0.9rem;
+            font-weight: 600; color: #555; transition: all 0.3s;
+        }
+        .btn-generate {
+            margin-top: 30px; padding: 15px 60px; border: none; border-radius: 50px;
+            background: var(--mg-green); color: white; font-size: 1.1rem;
+            cursor: pointer; box-shadow: 0 4px 10px rgba(74, 103, 65, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Mogring Lucky 5</h1>
+    <p style="font-size: 0.9rem; color: #666;">워크숍의 기운을 담은 오늘의 번호</p>
+</div>
+
+<div class="game-container" id="lotto-board">
+    <script>
+        for(let i=0; i<5; i++) {
+            document.write(`
+                <div class="game-row">
+                    <div class="game-label">${String.fromCharCode(65 + i)}</div>
+                    <div class="ball-group" id="game-${i}">
+                        <div class="ball">?</div><div class="ball">?</div><div class="ball">?</div>
+                        <div class="ball">?</div><div class="ball">?</div><div class="ball">?</div>
+                    </div>
+                </div>
+            `);
+        }
+    </script>
+</div>
+
+<button class="btn-generate" onclick="generateAll()">번호 생성하기</button>
+
+<script>
+    function getBallColor(num) {
+        if (num <= 10) return "#fbc400";
+        if (num <= 20) return "#69c8f2";
+        if (num <= 30) return "#ff7272";
+        if (num <= 40) return "#aaa";
+        return "#b0d840";
+    }
+
+    function generateAll() {
+        for(let i=0; i<5; i++) {
+            const numbers = [];
+            while(numbers.length < 6) {
+                const num = Math.floor(Math.random() * 45) + 1;
+                if(!numbers.includes(num)) numbers.push(num);
+            }
+            numbers.sort((a, b) => a - b);
+
+            const balls = document.querySelectorAll(`#game-${i} .ball`);
+            balls.forEach((ball, idx) => {
+                ball.innerText = numbers[idx];
+                ball.style.backgroundColor = getBallColor(numbers[idx]);
+                ball.style.color = "white";
+                ball.style.transform = "scale(1.1)";
+                setTimeout(() => ball.style.transform = "scale(1)", 200);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
