@@ -15,13 +15,10 @@
       --brown: #3b2a1f;
       --brown-soft: #6c4d35;
       --line: #f0c55b;
-      --white: #ffffff;
       --shadow: 0 18px 45px rgba(77, 47, 12, 0.16);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -37,13 +34,11 @@
       padding: 28px 16px;
     }
 
-    .page {
-      width: min(720px, 100%);
-    }
+    .page { width: min(720px, 100%); }
 
     .card {
       position: relative;
-      background: rgba(255, 255, 255, 0.86);
+      background: rgba(255, 255, 255, 0.88);
       border: 2px dashed var(--line);
       border-radius: 32px;
       box-shadow: var(--shadow);
@@ -67,9 +62,7 @@
       box-shadow: 0 8px 22px rgba(162, 110, 22, 0.12);
     }
 
-    .brand-badge span {
-      color: var(--butter);
-    }
+    .brand-badge span { color: var(--butter); }
 
     h1 {
       margin: 0;
@@ -79,9 +72,7 @@
       line-height: 1.18;
     }
 
-    h1 .yellow {
-      color: #d99a12;
-    }
+    h1 .yellow { color: #d99a12; }
 
     .subtitle {
       margin: 16px auto 0;
@@ -165,7 +156,7 @@
       cursor: pointer;
       text-decoration: none;
       text-align: center;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
       display: block;
     }
 
@@ -243,54 +234,14 @@
       user-select: none;
     }
 
-    .deco.one {
-      top: 26px;
-      left: 26px;
-      font-size: 34px;
-    }
-
-    .deco.two {
-      top: 24px;
-      right: 26px;
-      font-size: 32px;
-    }
-
-    .deco.three {
-      bottom: 24px;
-      left: 24px;
-      font-size: 28px;
-    }
+    .deco.one { top: 26px; left: 26px; font-size: 34px; }
+    .deco.two { top: 24px; right: 26px; font-size: 32px; }
+    .deco.three { bottom: 24px; left: 24px; font-size: 28px; }
 
     @media (min-width: 620px) {
-      .actions {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .actions .wide {
-        grid-column: 1 / -1;
-      }
-
-      .card {
-        padding: 42px 38px 34px;
-      }
-    }
-
-    @media print {
-      body {
-        background: #fff;
-        padding: 0;
-      }
-
-      .actions,
-      .notice,
-      .footer {
-        display: none;
-      }
-
-      .card {
-        box-shadow: none;
-        border: none;
-      }
+      .actions { grid-template-columns: 1fr 1fr; }
+      .actions .wide { grid-column: 1 / -1; }
+      .card { padding: 42px 38px 34px; }
     }
   </style>
 </head>
@@ -302,18 +253,18 @@
       <div class="deco two">🎁</div>
       <div class="deco three">💛</div>
 
-      <div class="brand-badge">Mog<span>l</span>ing</div>
+      <div class="brand-badge">Mog<span>r</span>ing</div>
 
       <h1><span class="yellow">모그링</span> 연락처 및 명함 안내</h1>
       <p class="subtitle">아래 버튼으로 저장해보세요</p>
       <p class="desc">
-        연락처는 vCard 형식으로 저장할 수 있으며, 명함 이미지는 휴대폰 갤러리에 저장해 사용할 수 있습니다.
+        개인 이름은 노출하지 않고, 모그링 대표 명의로 연락처와 명함 이미지를 저장할 수 있습니다.
       </p>
 
       <div class="profile">
         <div class="profile-box">
-          <div class="name">남경미</div>
-          <div class="title">모그링 대표</div>
+          <div class="name">모그링 대표</div>
+          <div class="title">브랜드 연락처</div>
           <a class="phone" href="tel:050713278820">📞 0507-1327-8820</a>
         </div>
       </div>
@@ -330,18 +281,16 @@
       </div>
 
       <div class="notice">
-        아이폰은 다운로드 후 연락처 앱에서 추가 화면이 열릴 수 있습니다. 안드로이드는 기종에 따라 “연락처에 추가” 또는 “파일 다운로드”로 표시될 수 있습니다.
+        vCard와 명함 이미지 모두 개인 실명 없이 저장되도록 설정되어 있습니다.
       </div>
     </section>
 
-    <div class="footer">© Mogling. Mobile business card page.</div>
+    <div class="footer">© Mogring. Mobile business card page.</div>
   </main>
 
   <script>
     const contact = {
-      firstName: "경미",
-      lastName: "남",
-      fullName: "남경미",
+      fullName: "모그링 대표",
       org: "모그링",
       title: "대표",
       phone: "0507-1327-8820"
@@ -351,13 +300,13 @@
       return [
         "BEGIN:VCARD",
         "VERSION:3.0",
-        `N:${contact.lastName};${contact.firstName};;;`,
+        "N:;모그링 대표;;;",
         `FN:${contact.fullName}`,
         `ORG:${contact.org}`,
         `TITLE:${contact.title}`,
         `TEL;TYPE=WORK,VOICE:${contact.phone}`,
         "END:VCARD"
-      ].join("\n");
+      ].join("\\n");
     }
 
     function downloadTextFile(filename, text, mime) {
@@ -373,7 +322,7 @@
     }
 
     document.getElementById("saveVcard").addEventListener("click", () => {
-      downloadTextFile("모그링_남경미_대표.vcf", makeVCard(), "text/vcard;charset=utf-8");
+      downloadTextFile("모그링_대표.vcf", makeVCard(), "text/vcard;charset=utf-8");
     });
 
     const canvas = document.getElementById("businessCard");
@@ -420,19 +369,19 @@
       ctx.textBaseline = "alphabetic";
 
       ctx.font = "bold 76px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
-      ctx.fillText("Mogling", 135, 190);
+      ctx.fillText("Mogring", 135, 190);
 
       ctx.fillStyle = "#d99a12";
       ctx.font = "bold 38px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
       ctx.fillText("모그링", 140, 252);
 
       ctx.fillStyle = "#3b2a1f";
-      ctx.font = "bold 92px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
-      ctx.fillText("남경미", 135, 390);
+      ctx.font = "bold 84px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+      ctx.fillText("모그링 대표", 135, 390);
 
       ctx.fillStyle = "#6c4d35";
       ctx.font = "bold 42px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
-      ctx.fillText("모그링 대표", 140, 458);
+      ctx.fillText("브랜드 연락처", 140, 458);
 
       ctx.fillStyle = "#3b2a1f";
       ctx.font = "bold 46px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
@@ -462,7 +411,7 @@
     document.getElementById("downloadCard").addEventListener("click", () => {
       const a = document.createElement("a");
       a.href = canvas.toDataURL("image/png");
-      a.download = "모그링_남경미_대표_명함.png";
+      a.download = "모그링_대표_명함.png";
       document.body.appendChild(a);
       a.click();
       a.remove();
